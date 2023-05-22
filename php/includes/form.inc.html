@@ -1,7 +1,44 @@
 <section>
 
-  <div>
-    SECTION
-  </div>
+  <form>
+    <!--Prénom-->
+    <div class="mb-3">
+      <input type="text" name="first-name" class="form-control" placeholder="Prénom">
+    </div>
+    <!--Nom-->
+    <div class="mb-3">
+      <input type="text" name="last-name" class="form-control" placeholder="Nom">
+    </div>
+    <!--Age-->
+    <div class="mb-3">
+      <label for="AgeInput" class="form-text">Âge (18 à 70 ans)</label>
+      <input type="number" min="18" max="70" name="age" class="form-control" id="AgeInput" placeholder="Renseignez votre âge">
+    </div>
+    <!--Taille-->
+    <div class="row g-3 align-items-center">
+      <div class="col-auto">
+        <label for="TailleInput" class="col-form-label">Taille (1,26m à 3m)</label>
+      </div>
+      <div class="col-auto">
+        <input type="number" min="1.26" max="3" name="size" id="TailleInput" class="form-control" aria-describedby="Taille2">
+      </div>
+      <div class="col-auto">
+        <span id="Taille2" class="form-text">m</span>
+      </div>
+    </div>
+    <!--Civilité-->
+    <div class="mt-2 mb-2 g-3 row align-items-center">
+      <div class="mb-3 form-check col-auto">
+        <input type="checkbox" name="femme" class="form-check-input" id="women>">
+        <label class="form-check-label" for="women">Femme</label>
+      </div>
+      <div class="mb-3 form-check col-auto">
+        <input type="checkbox" name="homme" class="form-check-input" id="man>">
+        <label class="form-check-label" for="man">Homme</label>
+      </div>
+    </div>
+    <!--Submit button-->
+    <button type="submit" class="btn btn-primary">Enregistrer les données</button>
+  </form>
 
 </section>

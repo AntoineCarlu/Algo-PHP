@@ -1,4 +1,4 @@
-
+<?php session_start() ?>
 
 <!-- HTML -->
 <!DOCTYPE html>
@@ -12,7 +12,18 @@
     <!--Nav Bar-->
     <?php include "./includes/ul.inc.php"; ?> 
     <!--SECTION-->
-    <?php include "./includes/form.inc.html"; ?>
+    <?php 
+      if (isset($_GET['add'])) {
+        include "./includes/form.inc.html";
+      }
+      else if (!empty($_SESSION)) {
+        echo "<p>Données sauvergardées</p>";
+      }
+      else {
+        echo "<a href='index.php?add'><button type='button' class='btn btn-primary'>Ajouter des données</button></a>";
+        echo "<a href='index.php?addmore'><button type='button' class='btn btn-secondary'>Ajouter plus de données</button></a>";
+      }
+    ?>
   </div>
 
   <!--FOOTER-->
