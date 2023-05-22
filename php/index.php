@@ -1,4 +1,7 @@
-<?php session_start() ?>
+<?php
+session_start();
+$table = $_SESSION['table'];
+?>
 
 <!-- HTML -->
 <!DOCTYPE html>
@@ -10,14 +13,46 @@
 
   <div class="row">
     <!--Nav Bar-->
-    <?php include "./includes/ul.inc.php"; ?> 
+    <nav>
+      <ul>
+        <il><a href="index.php"><button type="button" class="btn btn-outline-secondary">HOME</button></a></il>
+      <?php if (!empty($_SESSION)) {
+        include "./includes/ul.inc.php";
+      }
+      ?>
+      </ul>
+    </nav>
     <!--SECTION-->
     <?php 
+      //Include form when on page ?add
       if (isset($_GET['add'])) {
         include "./includes/form.inc.html";
       }
-      else if (!empty($_SESSION)) {
-        echo "<p>Données sauvergardées</p>";
+      //Define variable "table" when submit form
+      else if (isset($_POST['submitForm'])) {
+        $firstName = $_POST['first-name'];
+        $lastName = $_POST['last-name'];
+        $age = $_POST['age'];
+        $size = $_POST['size'];
+        $civility = $_POST['civility'];
+
+        $table = array(
+          'first-name' => $firstName,
+          'last-name' => $lastName,
+          'age' => $age,
+          'size' => $size,
+          'civility' => $civility,
+        );
+        $_SESSION['table'] = $table;
+          //Alert that the data is defined
+          echo "<p>Données sauvergardées</p>";
+      }
+      //Default page
+      else if (isset($_GET['debugging'])) {
+        echo "<p>===> Lecture du tableau à l'aide de la fonction print_r()</p>";
+        echo "<pre>";
+        print_r($table);
+        echo "</pre>";
       }
       else {
         echo "<a href='index.php?add'><button type='button' class='btn btn-primary'>Ajouter des données</button></a>";

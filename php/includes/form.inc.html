@@ -1,6 +1,6 @@
 <section>
 
-  <form>
+  <form method="POST" action="index.php">
     <!--Prénom-->
     <div class="mb-3">
       <input type="text" name="first-name" class="form-control" placeholder="Prénom">
@@ -20,7 +20,7 @@
         <label for="TailleInput" class="col-form-label">Taille (1,26m à 3m)</label>
       </div>
       <div class="col-auto">
-        <input type="number" min="1.26" max="3" name="size" id="TailleInput" class="form-control" aria-describedby="Taille2">
+        <input type="number" min="1.26" max="3" step="0.01" name="size" id="TailleInput" class="form-control" aria-describedby="Taille2">
       </div>
       <div class="col-auto">
         <span id="Taille2" class="form-text">m</span>
@@ -28,17 +28,17 @@
     </div>
     <!--Civilité-->
     <div class="mt-2 mb-2 g-3 row align-items-center">
-      <div class="mb-3 form-check col-auto">
-        <input type="checkbox" name="femme" class="form-check-input" id="women>">
+      <div class="mb-3 form-check col-auto form-check-inline">
+        <input class="form-check-input" type="radio" name="civility" id="women" value="women">
         <label class="form-check-label" for="women">Femme</label>
       </div>
-      <div class="mb-3 form-check col-auto">
-        <input type="checkbox" name="homme" class="form-check-input" id="man>">
+      <div class="mb-3 form-check col-auto form-check-inline">
+        <input class="form-check-input" type="radio" name="civility" id="man" value="man">
         <label class="form-check-label" for="man">Homme</label>
       </div>
     </div>
     <!--Submit button-->
-    <button type="submit" class="btn btn-primary">Enregistrer les données</button>
+    <button type="submit" name="submitForm" class="btn btn-primary">Enregistrer les données</button>
   </form>
 
 </section>
