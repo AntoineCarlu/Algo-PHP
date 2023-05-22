@@ -47,13 +47,14 @@ $table = $_SESSION['table'];
           //Alert that the data is defined
           echo "<p>Données sauvergardées</p>";
       }
-      //Default page
+      //"index.php?debugging" page
       else if (isset($_GET['debugging'])) {
         echo "<p>===> Lecture du tableau à l'aide de la fonction print_r()</p>";
         echo "<pre>";
         print_r($table);
         echo "</pre>";
       }
+      //Default page
       else {
         echo "<a href='index.php?add'><button type='button' class='btn btn-primary'>Ajouter des données</button></a>";
         echo "<a href='index.php?addmore'><button type='button' class='btn btn-secondary'>Ajouter plus de données</button></a>";
