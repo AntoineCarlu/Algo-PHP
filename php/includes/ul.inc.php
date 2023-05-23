@@ -1,5 +1,5 @@
 <?php if (isset($_GET['debugging'])) {echo "<li><a href='index.php?debugging'><button type='button' class='btn btn-outline-primary active'>Débogage</button></a></li>";} else {echo "<li><a href='index.php?debugging'><button type='button' class='btn btn-outline-secondary'>Débogage</button></a></li>";} ?>
-<li><a><button type="button" class="btn btn-outline-secondary">Concaténation</button></a></li>
-<li><a><button type="button" class="btn btn-outline-secondary">Boucle</button></a></li>
-<li><a><button type="button" class="btn btn-outline-secondary">Fonction</button></a></li>
-<li><a><button type="button" class="btn btn-outline-secondary">Supprimer</button></a></li>
+<?php if (isset($_GET['concatenation'])) {echo "<li><a href='index.php?concatenation'><button type='button' class='btn btn-outline-primary active'>Concaténation</button></a></li>";} else {echo "<li><a href='index.php?concatenation'><button type='button' class='btn btn-outline-secondary'>Concaténation</button></a></li>";} ?>
+<?php if (isset($_GET['loop'])) {echo "<li><a href='index.php?loop'><button type='button' class='btn btn-outline-primary active'>Boucle</button></a></li>";} else {echo "<li><a href='index.php?loop'><button type='button' class='btn btn-outline-secondary'>Boucle</button></a></li>";} ?>
+<?php if (isset($_GET['function'])) {echo "<li><a href='index.php?function'><button type='button' class='btn btn-outline-primary active'>Fonction</button></a></li>";} else {echo "<li><a href='index.php?function'><button type='button' class='btn btn-outline-secondary'>Fonction</button></a></li>";} ?>
+<?php if (isset($_GET['del'])) {echo "<li><a href='index.php?del'><button type='button' class='btn btn-outline-primary active'>Supprimer</button></a></li>";} else {echo "<li><a href='index.php?del'><button type='button' class='btn btn-outline-secondary'>Supprimer</button></a></li>";} ?>
