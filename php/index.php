@@ -17,8 +17,8 @@ if (!empty($_SESSION)) {$table = $_SESSION['table'];}
     <div class="row justify-content-center mt-5">
       <!--Nav Bar-->
       <nav class="col-md-2">
-        <ul class="list-group">
-          <il><a class="list-group-item" href="index.php"><button type="button" class="btn btn-outline-secondary">HOME</button></a></il>
+        <ul class="list-unstyled list-group">
+          <a class="btn btn-outline-secondary" href="index.php">HOME</a>
         <?php if (!empty($_SESSION)) {
           include "./includes/ul.inc.php";
         }
@@ -102,7 +102,7 @@ if (!empty($_SESSION)) {$table = $_SESSION['table'];}
         }
         //Default/Home page
         else {
-          echo "<a href='index.php?add'><button type='button' class='btn btn-primary'>Ajouter des données</button></a>";
+          echo "<a href='index.php?add'><button type='button' class='btn btn-primary m-1'>Ajouter des données</button></a>";
           echo "<a href='index.php?addmore'><button type='button' class='btn btn-secondary'>Ajouter plus de données</button></a>";
         }
       ?>
