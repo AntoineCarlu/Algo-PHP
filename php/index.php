@@ -17,7 +17,7 @@ if (!empty($_SESSION)) {$table = $_SESSION['table'];}
     <div class="row justify-content-center mt-5">
       <!--Nav Bar-->
       <nav class="col-md-2">
-        <ul class="list-unstyled list-group">
+        <ul class="list-unstyled list-group mb-4">
           <a class="btn btn-outline-secondary" href="index.php">HOME</a>
         <?php if (!empty($_SESSION)) {
           include "./includes/ul.inc.php";
@@ -26,7 +26,7 @@ if (!empty($_SESSION)) {$table = $_SESSION['table'];}
         </ul>
       </nav>
       <!--SECTION-->
-      <div class="col-md-10 w-75">
+      <div class="col-md-9">
       <?php 
         //Include form when on page ?add
         if (isset($_GET['add'])) {
@@ -50,7 +50,7 @@ if (!empty($_SESSION)) {$table = $_SESSION['table'];}
           );
           $_SESSION['table'] = $table;
             //Alert that the data is defined
-            echo "<p>Données sauvergardées</p>";
+            echo "<p class='p-3 mb-2 bg-success text-green text-center'>Données sauvergardées</p>";
         }
         //"index.php?debugging" page
         else if (isset($_GET['debugging']) && !empty($_SESSION)) {
@@ -98,11 +98,11 @@ if (!empty($_SESSION)) {$table = $_SESSION['table'];}
         else if (isset($_GET['del']) && !empty($_SESSION)) {
           $_SESSION = array();
           session_destroy();
-          echo "<p>Données supprimées</p>";
+          echo "<p class='p-3 mb-2 bg-success text-green text-center'>Données supprimées</p>";
         }
         //Default/Home page
         else {
-          echo "<a href='index.php?add'><button type='button' class='btn btn-primary m-1'>Ajouter des données</button></a>";
+          echo "<a href='index.php?add'><button type='button' class='btn btn-primary mx-1'>Ajouter des données</button></a>";
           echo "<a href='index.php?addmore'><button type='button' class='btn btn-secondary'>Ajouter plus de données</button></a>";
         }
       ?>
