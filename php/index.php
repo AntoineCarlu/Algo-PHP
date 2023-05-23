@@ -17,8 +17,8 @@ if (!empty($_SESSION)) {$table = $_SESSION['table'];}
     <div class="row justify-content-center mt-5">
       <!--Nav Bar-->
       <nav class="col-md-2">
-        <ul class="list-group row">
-          <il><a href="index.php"><button type="button" class="btn btn-outline-secondary">HOME</button></a></il>
+        <ul class="list-group">
+          <il><a class="list-group-item" href="index.php"><button type="button" class="btn btn-outline-secondary">HOME</button></a></il>
         <?php if (!empty($_SESSION)) {
           include "./includes/ul.inc.php";
         }
@@ -26,10 +26,11 @@ if (!empty($_SESSION)) {$table = $_SESSION['table'];}
         </ul>
       </nav>
       <!--SECTION-->
-      <div class="col-md-10">
+      <div class="col-md-10 w-75">
       <?php 
         //Include form when on page ?add
         if (isset($_GET['add'])) {
+          echo "<h2 class='text-center mb-3'>Ajouter des données</h2>";
           include "./includes/form.inc.html";
         }
         //Define variable "table" when submit form
@@ -52,7 +53,7 @@ if (!empty($_SESSION)) {$table = $_SESSION['table'];}
             echo "<p>Données sauvergardées</p>";
         }
         //"index.php?debugging" page
-        else if (isset($_GET['debugging'])) {
+        else if (isset($_GET['debugging']) && !empty($_SESSION)) {
           echo "<h2 class='text-center mb-5'>Débogage</h2>";
           echo "<h3 class='fs-5'>===> Lecture du tableau à l'aide de la fonction print_r()</h3>";
           echo "<pre>";
@@ -60,7 +61,7 @@ if (!empty($_SESSION)) {$table = $_SESSION['table'];}
           echo "</pre>";
         }
         //"index.php?concatenation" page
-        else if (isset($_GET['concatenation'])) {
+        else if (isset($_GET['concatenation']) && !empty($_SESSION)) {
           echo "<h2 class='text-center mb-5'>Concaténation</h2>";
           echo "<h3 class='fs-5 mt-5'>===> Construction d'une phrase avec le contenu du tableau</h3>";
           echo "<p>". (($table['civility'] == 'man') ? "Mr ":"Mme "). $table['first-name']." ". $table['last-name']. "<br>
@@ -73,7 +74,7 @@ if (!empty($_SESSION)) {$table = $_SESSION['table'];}
             J'ai ". $table['age']. " ans et je mesure ". str_replace('.', ',', $table['size']). "m</p>";
         }
         //"index.php?loop" page
-        else if (isset($_GET['loop'])) {
+        else if (isset($_GET['loop']) && !empty($_SESSION)) {
           echo "<h2 class='text-center mb-5'>Boucle</h2>";
           echo "<h3 class='fs-5 mt-5'>===> Lecture du tableau à l'aide d'une boucle foreach</h3>";
           $counter = 0;
@@ -82,7 +83,7 @@ if (!empty($_SESSION)) {$table = $_SESSION['table'];}
           }
         }
         //"index.php?function" page
-        else if (isset($_GET['function'])) {
+        else if (isset($_GET['function']) && !empty($_SESSION)) {
           echo "<h2 class='text-center mb-5'>Fonction</h2>";
           echo "<h3 class='fs-5 mt-5'>===> J'utilise ma fonction readTable()</h3>";
           function readTable($table) {
@@ -94,7 +95,7 @@ if (!empty($_SESSION)) {$table = $_SESSION['table'];}
           readTable($table);
         }
         //"index.php?del" page to delete session and datas
-        else if (isset($_GET['del'])) {
+        else if (isset($_GET['del']) && !empty($_SESSION)) {
           $_SESSION = array();
           session_destroy();
           echo "<p>Données supprimées</p>";
