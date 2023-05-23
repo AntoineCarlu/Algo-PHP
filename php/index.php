@@ -1,6 +1,6 @@
 <?php
 session_start();
-$table = $_SESSION['table'];
+if (!empty($_SESSION)) {$table = $_SESSION['table'];}
 ?>
 
 <!-- HTML -->
@@ -72,12 +72,34 @@ $table = $_SESSION['table'];
           echo "<p>". (($table['civility'] == 'man') ? "Mr ":"Mme "). ucfirst($table['first-name'])." ". strtoupper($table['last-name']). "<br>
             J'ai ". $table['age']. " ans et je mesure ". str_replace('.', ',', $table['size']). "m</p>";
         }
+        //"index.php?loop" page
         else if (isset($_GET['loop'])) {
+          echo "<h2 class='text-center mb-5'>Boucle</h2>";
+          echo "<h3 class='fs-5 mt-5'>===> Lecture du tableau à l'aide d'une boucle foreach</h3>";
+          $counter = 0;
           foreach ($table as $key => $value) {
-            echo "à la ligne n°". ($key + 1). " correspond la clé \"$key\" et contient \"$value\"";
+            echo "à la ligne n°". $counter++. " correspond la clé \"$key\" et contient \"$value\"<br>";
           }
         }
-        //Default page
+        //"index.php?function" page
+        else if (isset($_GET['function'])) {
+          echo "<h2 class='text-center mb-5'>Fonction</h2>";
+          echo "<h3 class='fs-5 mt-5'>===> J'utilise ma fonction readTable()</h3>";
+          function readTable($table) {
+            $counter = 0;
+            foreach ($table as $key => $value) {
+              echo "à la ligne n°". $counter++. " correspond la clé \"$key\" et contient \"$value\"<br>";
+            }
+          }
+          readTable($table);
+        }
+        //"index.php?del" page to delete session and datas
+        else if (isset($_GET['del'])) {
+          $_SESSION = array();
+          session_destroy();
+          echo "<p>Données supprimées</p>";
+        }
+        //Default/Home page
         else {
           echo "<a href='index.php?add'><button type='button' class='btn btn-primary'>Ajouter des données</button></a>";
           echo "<a href='index.php?addmore'><button type='button' class='btn btn-secondary'>Ajouter plus de données</button></a>";
