@@ -41,4 +41,12 @@
       <input class="" type="date" name="birthday" id="ddn">
     </div>
   </div>
+  <div class="card col-11 mx-auto my-1 px-2">
+  <p class="m-0">Joindre une image</p>
+  <div class="input-group g-3 align-items-center mb-2">
+    <div class="col-auto">
+      <input type="file" name="img" id="Image" class="form-control" accept=".jpg, .jpeg, .png">
+    </div>
+  </div>
+</div>
 </div>

@@ -45,12 +45,10 @@ if (!empty($_SESSION)) {$table = $_SESSION['table'];}
             $size = $_POST['size'];
             if (!empty($_POST['civility'])) {$civility = $_POST['civility'];} else {$civility = "";}
             
-
             if (empty($firstName&&$lastName&&$age&&$size&&$civility)) {
-              echo "<p class='p-3 mb-2 bg-danger text-red text-center'>Veuillez remplir tout le formulaire</p>";
+              echo "<p class='p-3 mb-2 alert-danger text-red text-center'>Veuillez remplir tout le formulaire</p>";
               echo "<a class='btn btn-primary' href='index.php?add'>Réessayer</a>";
-            }
-            else if (!empty($firstName&&$lastName&&$age&&$size&&$civility)) {
+            } else if (!empty($firstName&&$lastName&&$age&&$size&&$civility)) {
               $table = array(
                 'first-name' => $firstName,
                 'last-name' => $lastName,
@@ -60,9 +58,10 @@ if (!empty($_SESSION)) {$table = $_SESSION['table'];}
               );
               $_SESSION['table'] = $table;
                 //Alert that the data is defined
-                echo "<p class='p-3 mb-2 bg-success text-green text-center'>Données sauvergardées</p>";
+                echo "<p class='p-3 mb-2 alert-success text-green text-center'>Données sauvergardées</p>";
             }
           }
+
           //Include second form when on page ?addmore
           else if (isset($_GET['addmore'])) {
             echo "<h2 class='text-center mb-3'>Ajouter plus de données</h2>";
@@ -73,6 +72,7 @@ if (!empty($_SESSION)) {$table = $_SESSION['table'];}
               include "./includes/form2.inc.php";
                 echo "<!--Submit button--> <button type='submit' name='submitForm2' class='btn btn-primary'>Enregistrer les données</button> </form>";
           }
+          //Define variable "table" when submit form
           else if (isset($_POST['submitForm2'])) {
             $firstName = $_POST['first-name'];
             $lastName = $_POST['last-name'];
@@ -90,11 +90,31 @@ if (!empty($_SESSION)) {$table = $_SESSION['table'];}
             $color = $_POST['color'];
             $birthday = $_POST['birthday'];
 
+            //
+            $img = $_FILES['img'];
+                $fileName = $img['name'];
+                $fileType = $img['type'];
+                $fileTmp = $img['tmp_name'];
+                $fileError = $img['error'];
+                $fileSize = $img['size'];
+
+                $destination = "./uploaded/"."img1.png";
+                move_uploaded_file($tmpName, $destination);
+
+                $imageDetails = array(
+                  'name' => $fileName,
+                  'type' => $fileType,
+                  'tmp_name' => $fileTmp,
+                  'error' => $fileError,
+                  'size' => $fileSize,
+                  'path' => $destination,
+                );
+                //
+
             if (empty($firstName&&$lastName&&$age&&$size&&$civility&&$birthday)) {
-              echo "<p class='p-3 mb-2 bg-danger text-red text-center'>Veuillez remplir tout le formulaire</p>";
+              echo "<p class='p-3 mb-2 alert-danger text-red text-center'>Veuillez remplir tout le formulaire</p>";
               echo "<a class='btn btn-primary' href='index.php?addmore'>Réessayer</a>";
-            }
-            else if (!empty($firstName&&$lastName&&$age&&$size&&$civility&&$birthday)) {
+            } else if (!empty($firstName&&$lastName&&$age&&$size&&$civility&&$birthday)) {
               $table = array(
                 'first-name' => $firstName,
                 'last-name' => $lastName,
@@ -112,11 +132,13 @@ if (!empty($_SESSION)) {$table = $_SESSION['table'];}
                 'color' => $color,
                 'birthday' => $birthday,
               );
+
               $_SESSION['table'] = $table;
                 //Alert that the data is defined
-                echo "<p class='p-3 mb-2 bg-success text-green text-center'>Données sauvergardées</p>";
+                echo "<p class='p-3 mb-2 alert-success text-green text-center'>Données sauvergardées</p>";
             }
           }
+
           //"index.php?debugging" page
           else if (isset($_GET['debugging']) && !empty($_SESSION)) {
             echo "<h2 class='text-center mb-5'>Débogage</h2>";
@@ -125,6 +147,7 @@ if (!empty($_SESSION)) {$table = $_SESSION['table'];}
             print_r($table);
             echo "</pre>";
           }
+
           //"index.php?concatenation" page
           else if (isset($_GET['concatenation']) && !empty($_SESSION)) {
             echo "<h2 class='text-center mb-5'>Concaténation</h2>";
@@ -138,6 +161,7 @@ if (!empty($_SESSION)) {$table = $_SESSION['table'];}
             echo "<p>". (($table['civility'] == 'man') ? "Mr ":"Mme "). ucfirst($table['first-name'])." ". strtoupper($table['last-name']). "<br>
               J'ai ". $table['age']. " ans et je mesure ". str_replace('.', ',', $table['size']). "m</p>";
           }
+
           //"index.php?loop" page
           else if (isset($_GET['loop']) && !empty($_SESSION)) {
             echo "<h2 class='text-center mb-5'>Boucle</h2>";
@@ -147,6 +171,7 @@ if (!empty($_SESSION)) {$table = $_SESSION['table'];}
               echo "à la ligne n°". $counter++. " correspond la clé \"$key\" et contient \"$value\"<br>";
             }
           }
+
           //"index.php?function" page
           else if (isset($_GET['function']) && !empty($_SESSION)) {
             echo "<h2 class='text-center mb-5'>Fonction</h2>";
@@ -159,12 +184,14 @@ if (!empty($_SESSION)) {$table = $_SESSION['table'];}
             }
             readTable($table);
           }
+
           //"index.php?del" page to delete session and datas
           else if (isset($_GET['del']) && !empty($_SESSION)) {
             $_SESSION = array();
             session_destroy();
-            echo "<p class='p-3 mb-2 bg-success text-green text-center'>Données supprimées</p>";
+            echo "<p class='p-3 mb-2 alert-success text-green text-center'>Données supprimées</p>";
           }
+
           //Default/Home page
           else {
             echo "<a href='index.php?add'><button type='button' class='btn btn-primary mx-1'>Ajouter des données</button></a>";
