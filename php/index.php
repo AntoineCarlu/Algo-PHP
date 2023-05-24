@@ -37,6 +37,32 @@ if (!empty($_SESSION)) {$table = $_SESSION['table'];}
             include "./includes/form.inc.html";
               echo "<!--Submit button--> <button type='submit' name='submitForm' class='btn btn-primary'>Enregistrer les données</button> </form>";
           }
+          //Define variable "table" when submit form
+          else if (isset($_POST['submitForm'])) {
+            $firstName = $_POST['first-name'];
+            $lastName = $_POST['last-name'];
+            $age = $_POST['age'];
+            $size = $_POST['size'];
+            if (!empty($_POST['civility'])) {$civility = $_POST['civility'];} else {$civility = "";}
+            
+
+            if (empty($firstName&&$lastName&&$age&&$size&&$civility)) {
+              echo "<p class='p-3 mb-2 bg-danger text-red text-center'>Veuillez remplir tout le formulaire</p>";
+              echo "<a class='btn btn-primary' href='index.php?add'>Réessayer</a>";
+            }
+            else if (!empty($firstName&&$lastName&&$age&&$size&&$civility)) {
+              $table = array(
+                'first-name' => $firstName,
+                'last-name' => $lastName,
+                'age' => $age,
+                'size' => $size,
+                'civility' => $civility,
+              );
+              $_SESSION['table'] = $table;
+                //Alert that the data is defined
+                echo "<p class='p-3 mb-2 bg-success text-green text-center'>Données sauvergardées</p>";
+            }
+          }
           //Include second form when on page ?addmore
           else if (isset($_GET['addmore'])) {
             echo "<h2 class='text-center mb-3'>Ajouter plus de données</h2>";
@@ -45,46 +71,51 @@ if (!empty($_SESSION)) {$table = $_SESSION['table'];}
                 include "./includes/form.inc.html";
               echo "</div>";
               include "./includes/form2.inc.php";
-                echo "<!--Submit button--> <button type='submit' name='submitForm' class='btn btn-primary'>Enregistrer les données</button> </form>";
+                echo "<!--Submit button--> <button type='submit' name='submitForm2' class='btn btn-primary'>Enregistrer les données</button> </form>";
           }
-          //Define variable "table" when submit form
-          else if (isset($_POST['submitForm'])) {
+          else if (isset($_POST['submitForm2'])) {
             $firstName = $_POST['first-name'];
             $lastName = $_POST['last-name'];
             $age = $_POST['age'];
             $size = $_POST['size'];
-            $civility = $_POST['civility'];
-
-            $table = array(
-              'first-name' => $firstName,
-              'last-name' => $lastName,
-              'age' => $age,
-              'size' => $size,
-              'civility' => $civility,
-            );
-            $_SESSION['table'] = $table;
-              //Alert that the data is defined
-              echo "<p class='p-3 mb-2 bg-success text-green text-center'>Données sauvergardées</p>";
-          }
-          else if (isset($_POST['submitForm']) && $_GET['addmore']) {
-            $firstName = $_POST['first-name'];
-            $lastName = $_POST['last-name'];
-            $age = $_POST['age'];
-            $size = $_POST['size'];
-            $civility = $_POST['civility'];
+            if (!empty($_POST['civility'])) {$civility = $_POST['civility'];} else {$civility = "";}
+            if (!empty($_POST['html'])) {$html = $_POST['html'];} else {$html = "";}
+            if (!empty($_POST['css'])) {$css = $_POST['css'];} else {$css = "";}
+            if (!empty($_POST['javascript'])) {$javascript = $_POST['javascript'];} else {$javascript = "";}
+            if (!empty($_POST['php'])) {$php = $_POST['php'];} else {$php = "";}
+            if (!empty($_POST['mysql'])) {$mysql = $_POST['mysql'];} else {$mysql = "";}
+            if (!empty($_POST['bootstrap'])) {$bootstrap = $_POST['bootstrap'];} else {$bootstrap = "";}
+            if (!empty($_POST['symfony'])) {$symfony = $_POST['symfony'];} else {$symfony = "";}
+            if (!empty($_POST['react'])) {$react = $_POST['react'];} else {$react = "";}
             $color = $_POST['color'];
+            $birthday = $_POST['birthday'];
 
-            $table = array(
-              'first-name' => $firstName,
-              'last-name' => $lastName,
-              'age' => $age,
-              'size' => $size,
-              'civility' => $civility,
-              'color' => $color,
-            );
-            $_SESSION['table'] = $table;
-              //Alert that the data is defined
-              echo "<p class='p-3 mb-2 bg-success text-green text-center'>Données sauvergardées</p>";
+            if (empty($firstName&&$lastName&&$age&&$size&&$civility&&$birthday)) {
+              echo "<p class='p-3 mb-2 bg-danger text-red text-center'>Veuillez remplir tout le formulaire</p>";
+              echo "<a class='btn btn-primary' href='index.php?addmore'>Réessayer</a>";
+            }
+            else if (!empty($firstName&&$lastName&&$age&&$size&&$civility&&$birthday)) {
+              $table = array(
+                'first-name' => $firstName,
+                'last-name' => $lastName,
+                'age' => $age,
+                'size' => $size,
+                'civility' => $civility,
+                'html' => $html,
+                'css' => $css,
+                'javascript' => $javascript,
+                'php' => $php,
+                'mysql' => $mysql,
+                'bootstrap' => $bootstrap,
+                'symfony' => $symfony,
+                'react' => $react,
+                'color' => $color,
+                'birthday' => $birthday,
+              );
+              $_SESSION['table'] = $table;
+                //Alert that the data is defined
+                echo "<p class='p-3 mb-2 bg-success text-green text-center'>Données sauvergardées</p>";
+            }
           }
           //"index.php?debugging" page
           else if (isset($_GET['debugging']) && !empty($_SESSION)) {
