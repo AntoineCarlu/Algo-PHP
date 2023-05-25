@@ -98,7 +98,7 @@ if (!empty($_SESSION)) {$table = $_SESSION['table'];}
                 $destination = "./uploaded/". $fileName;
 
                 $extensions = ['image/jpg', 'image/png', 'image/jpeg'];
-                $maxSize = 250000;
+                $maxSize = 2000000;
 
             //Error alert if inputs are empty
             if (empty($firstName&&$lastName&&$age&&$size&&$civility&&$birthday&&$fileName)) {
@@ -107,12 +107,12 @@ if (!empty($_SESSION)) {$table = $_SESSION['table'];}
             } 
             //Error alert if type doesn't match
             else if (!in_array($fileType, $extensions)) {
-              echo "<p class='p-3 mb-2 alert-danger text-red text-center'>Le format de l'image n'est pas valide. Utilisez du '.jpg .png .jpeg'.</p>";
+              echo "<p class='p-3 mb-2 alert-danger text-red text-center'>Le format de l'image ($fileType) n'est pas valide. Utilisez du '.jpg .png .jpeg'.</p>";
               echo "<a class='btn btn-primary' href='index.php?addmore'>Réessayer</a>";
             } 
             //Error alert if size too high
             else if ($fileSize >= $maxSize) {
-              echo "<p class='p-3 mb-2 alert-danger text-red text-center'>La taille d'image est trop grande, utilisez une image de 250ko maximum.</p>";
+              echo "<p class='p-3 mb-2 alert-danger text-red text-center'>La taille d'image est trop grande, utilisez une image de 2Mo maximum.</p>";
               echo "<a class='btn btn-primary' href='index.php?addmore'>Réessayer</a>";
             } 
             //Error alert if errors are detected
