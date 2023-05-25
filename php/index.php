@@ -46,10 +46,48 @@ if (!empty($_SESSION)) {$table = $_SESSION['table'];}
             $size = $_POST['size'];
             if (!empty($_POST['civility'])) {$civility = $_POST['civility'];} else {$civility = "";}
             
+            //Error alert if inputs are empty
             if (empty($firstName&&$lastName&&$age&&$size&&$civility)) {
               echo "<p class='p-3 mb-2 alert-danger text-red text-center'>Veuillez remplir tout le formulaire</p>";
               echo "<a class='btn btn-primary' href='index.php?add'>Réessayer</a>";
-            } else if (!empty($firstName&&$lastName&&$age&&$size&&$civility)) {
+            } 
+            //Error alert if names are unvalid
+            else if (strlen($firstName) <2||strlen($firstName) >20) {
+              echo "<p class='p-3 mb-2 alert-danger text-red text-center'>Le prénom doit contenir entre 2 et 20 caractères.</p>";
+              echo "<a class='btn btn-primary' href='index.php?add'>Réessayer</a>";
+            }
+            else if (!ctype_alpha($firstName)) {
+              echo "<p class='p-3 mb-2 alert-danger text-red text-center'>Le prénom ne doit contenir que des lettres.</p>";
+              echo "<a class='btn btn-primary' href='index.php?add'>Réessayer</a>";
+            }
+            else if (strlen($lastName) <2||strlen($lastName) >20) {
+              echo "<p class='p-3 mb-2 alert-danger text-red text-center'>Le nom doit contenir entre 2 et 20 caractères.</p>";
+              echo "<a class='btn btn-primary' href='index.php?add'>Réessayer</a>";
+            }
+            else if (!ctype_alpha($lastName)) {
+              echo "<p class='p-3 mb-2 alert-danger text-red text-center'>Le nom ne doit contenir que des lettres.</p>";
+              echo "<a class='btn btn-primary' href='index.php?add'>Réessayer</a>";
+            }
+            //Error alert if age is unvalid
+            else if ($age <18||$age >70) {
+              echo "<p class='p-3 mb-2 alert-danger text-red text-center'>L'âge doit être compris entre 18 et 70 ans. A la porte le mioche !</p>";
+              echo "<a class='btn btn-primary' href='index.php?add'>Réessayer</a>";
+            }
+            else if (!is_numeric($age)) {
+              echo "<p class='p-3 mb-2 alert-danger text-red text-center'>L'âge ne devrait contenir que des nombres</p>";
+              echo "<a class='btn btn-primary' href='index.php?add'>Réessayer</a>";
+            }
+            //Error alert if size is unvalid
+            else if ($size <1.26||$size >3) {
+              echo "<p class='p-3 mb-2 alert-danger text-red text-center'>La taille doit être compris  entre 1,26m et 3m. On aimes pas les tricheurs ici.</p>";
+              echo "<a class='btn btn-primary' href='index.php?add'>Réessayer</a>";
+            }
+            else if (!is_numeric($size)) {
+              echo "<p class='p-3 mb-2 alert-danger text-red text-center'>La taille ne devrait contenir que des nombres</p>";
+              echo "<a class='btn btn-primary' href='index.php?add'>Réessayer</a>";
+            }
+            //Save datas if everything is ok
+            else if (!empty($firstName&&$lastName&&$age&&$size&&$civility)) {
               $table = array(
                 'first-name' => $firstName,
                 'last-name' => $lastName,
@@ -119,6 +157,41 @@ if (!empty($_SESSION)) {$table = $_SESSION['table'];}
             //Error alert if errors are detected
             else if ($fileError >= 1) {
               echo "<p class='p-3 mb-2 alert-danger text-red text-center'>$fileError a été détecter lors du téléchargement de l'image.</p>";
+              echo "<a class='btn btn-primary' href='index.php?addmore'>Réessayer</a>";
+            }
+            //Error alert if names are unvalid
+            else if (strlen($firstName) <2||strlen($firstName) >20) {
+              echo "<p class='p-3 mb-2 alert-danger text-red text-center'>Le prénom doit avoir entre 2 et 20 caractères.</p>";
+              echo "<a class='btn btn-primary' href='index.php?addmore'>Réessayer</a>";
+            }
+            else if (!ctype_alpha($firstName)) {
+              echo "<p class='p-3 mb-2 alert-danger text-red text-center'>Le prénom ne doit contenir que des lettres.</p>";
+              echo "<a class='btn btn-primary' href='index.php?addmore'>Réessayer</a>";
+            }
+            else if (strlen($lastName) <2||strlen($lastName) >20) {
+              echo "<p class='p-3 mb-2 alert-danger text-red text-center'>Le nom doit avoir entre 2 et 20 caractères.</p>";
+              echo "<a class='btn btn-primary' href='index.php?addmore'>Réessayer</a>";
+            }
+            else if (!ctype_alpha($lastName)) {
+              echo "<p class='p-3 mb-2 alert-danger text-red text-center'>Le nom ne doit contenir que des lettres.</p>";
+              echo "<a class='btn btn-primary' href='index.php?addmore'>Réessayer</a>";
+            }
+            //Error alert if age is unvalid
+            else if ($age <18||$age >70) {
+              echo "<p class='p-3 mb-2 alert-danger text-red text-center'>L'âge doit être compris entre 18 et 70 ans. A la porte le mioche !</p>";
+              echo "<a class='btn btn-primary' href='index.php?addmore'>Réessayer</a>";
+            }
+            else if (!is_numeric($age)) {
+              echo "<p class='p-3 mb-2 alert-danger text-red text-center'>L'âge ne devrait contenir que des nombres</p>";
+              echo "<a class='btn btn-primary' href='index.php?addmore'>Réessayer</a>";
+            }
+            //Error alert if size is unvalid
+            else if ($size <1.26||$size >3) {
+              echo "<p class='p-3 mb-2 alert-danger text-red text-center'>La taille doit être compris  entre 1,26m et 3m. On aimes pas les tricheurs ici.</p>";
+              echo "<a class='btn btn-primary' href='index.php?addmore'>Réessayer</a>";
+            }
+            else if (!is_numeric($size)) {
+              echo "<p class='p-3 mb-2 alert-danger text-red text-center'>La taille ne devrait contenir que des nombres</p>";
               echo "<a class='btn btn-primary' href='index.php?addmore'>Réessayer</a>";
             }
             //Save datas and upload image if everything is ok
