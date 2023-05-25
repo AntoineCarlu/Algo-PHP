@@ -1,6 +1,7 @@
 <?php
 session_start();
 if (!empty($_SESSION)) {$table = $_SESSION['table'];}
+
 ?>
 
 <!-- HTML -->
@@ -122,6 +123,10 @@ if (!empty($_SESSION)) {$table = $_SESSION['table'];}
             }
             //Save datas and upload image if everything is ok
             else if (!empty($firstName&&$lastName&&$age&&$size&&$civility&&$birthday&&$fileName)) {
+              //check if "uploaded" file exist and create one if not to stock image
+              if (!file_exists('./uploaded')) {
+                mkdir('uploaded');
+              }
               //upload files
               move_uploaded_file($fileTmp, $destination);
               //define tables
@@ -186,10 +191,15 @@ if (!empty($_SESSION)) {$table = $_SESSION['table'];}
             echo "<h3 class='fs-5 mt-5'>===> Lecture du tableau à l'aide d'une boucle foreach</h3>";
             //Loop to read datas
             $counter = 0;
-            $img_path = $_SESSION['table']['image']['path'];
+            if (!empty($_SESSION['table']['image'])) {$img_path = $_SESSION['table']['image']['path'];}
             foreach ($table as $key => $value) {
-              if ($key == 'image') {echo "à la ligne n°". $counter++. " correspond la clé \"$key\" et contient <img class='w-75' src='$img_path' alt='balise img'><br>";}
-              else {echo "à la ligne n°". $counter++. " correspond la clé \"$key\" et contient \"$value\"<br>";}
+              if (!empty($_SESSION['table']['image'])) {
+                if ($key == 'image') {echo "à la ligne n°". $counter++. " correspond la clé \"$key\" et contient <img class='w-75' src='$img_path' alt='balise img'><br>";}
+                else {echo "à la ligne n°". $counter++. " correspond la clé \"$key\" et contient \"$value\"<br>";}
+              }
+              else {
+                echo "à la ligne n°". $counter++. " correspond la clé \"$key\" et contient \"$value\"<br>";
+              }
             }
           }
 
@@ -200,10 +210,15 @@ if (!empty($_SESSION)) {$table = $_SESSION['table'];}
             //function to read datas
             function readTable($table) {
               $counter = 0;
-              $img_path = $_SESSION['table']['image']['path'];
+              if (!empty($_SESSION['table']['image'])) {$img_path = $_SESSION['table']['image']['path'];}
               foreach ($table as $key => $value) {
-                if ($key == 'image') {echo "à la ligne n°". $counter++. " correspond la clé \"$key\" et contient <img class='w-75' src='$img_path' alt='balise img'><br>";}
-                else {echo "à la ligne n°". $counter++. " correspond la clé \"$key\" et contient \"$value\"<br>";}
+                if (!empty($_SESSION['table']['image'])) {
+                  if ($key == 'image') {echo "à la ligne n°". $counter++. " correspond la clé \"$key\" et contient <img class='w-75' src='$img_path' alt='balise img'><br>";}
+                  else {echo "à la ligne n°". $counter++. " correspond la clé \"$key\" et contient \"$value\"<br>";}
+                }
+                else {
+                  echo "à la ligne n°". $counter++. " correspond la clé \"$key\" et contient \"$value\"<br>";
+                }
               }
             }
             readTable($table);
