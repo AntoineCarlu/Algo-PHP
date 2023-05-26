@@ -1,16 +1,16 @@
   <form method="POST" action="index.php" enctype="multipart/form-data">
     <!--Prénom-->
     <div class="mb-3">
-      <input type="text" name="first-name" class="form-control" placeholder="Prénom">
+      <input type="text" name="first-name" class="form-control" placeholder="Prénom" required>
     </div>
     <!--Nom-->
     <div class="mb-3">
-      <input type="text" name="last-name" class="form-control" placeholder="Nom">
+      <input type="text" name="last-name" class="form-control" placeholder="Nom" required>
     </div>
     <!--Age-->
     <div class="mb-3">
       <label for="AgeInput" class="form-text">Âge (18 à 70 ans)</label>
-      <input type="number" min="18" max="70" name="age" class="form-control" id="AgeInput" placeholder="Renseignez votre âge">
+      <input type="number" min="18" max="70" name="age" class="form-control" id="AgeInput" placeholder="Renseignez votre âge" required>
     </div>
     <!--Taille-->
     <div class="input-group g-3 align-items-center">
@@ -18,7 +18,7 @@
         <label for="TailleInput" class="col-form-label input-group-text">Taille (1,26m à 3m)</label>
       </div>
       <div class="col-auto">
-        <input type="number" min="1.26" max="3" step="0.01" name="size" id="TailleInput" class="form-control" aria-describedby="Taille2">
+        <input type="number" min="1.26" max="3" step="0.01" name="size" id="TailleInput" class="form-control" aria-describedby="Taille2" required>
       </div>
       <div class="col-auto input-group-text">
         <span id="Taille2" class="form-text">m</span>

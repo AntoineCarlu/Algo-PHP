@@ -38,14 +38,14 @@
     </div>
     <div>
       <label class="form-text fs-6" for="ddn">Date de naissance</label><br>
-      <input class="" type="date" name="birthday" id="ddn">
+      <input class="" type="date" name="birthday" id="ddn" required>
     </div>
   </div>
   <div class="card col-11 mx-auto my-1 px-2">
   <p class="m-0">Joindre une image</p>
   <div class="input-group g-3 align-items-center mb-2">
     <div class="col-auto">
-      <input type="file" name="img" id="Image" class="form-control" accept=".jpg, .jpeg, .png">
+      <input type="file" name="img" id="Image" class="form-control" accept=".jpg, .jpeg, .png" required>
     </div>
   </div>
 </div>

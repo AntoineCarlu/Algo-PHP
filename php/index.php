@@ -18,7 +18,7 @@ if (!empty($_SESSION)) {$table = $_SESSION['table'];}
     </div> 
 
     <!--Content-->
-    <div class="row justify-content-center mt-5">
+    <div class="row justify-content-center m-0 mt-5">
       <!--Nav Bar-->
       <nav class="col-md-2">
         <ul class="list-unstyled list-group mb-4">
@@ -138,6 +138,7 @@ if (!empty($_SESSION)) {$table = $_SESSION['table'];}
 
                 $extensions = ['image/jpg', 'image/png', 'image/jpeg'];
                 $maxSize = 2000000;
+                $checkImg = "./uploaded/". $fileName;
 
             //Error alert if inputs are empty
             if (empty($firstName&&$lastName&&$age&&$size&&$civility&&$birthday&&$fileName)) {
@@ -154,13 +155,23 @@ if (!empty($_SESSION)) {$table = $_SESSION['table'];}
               echo "<p class='p-3 mb-2 alert-danger text-red text-center'>La taille d'image est trop grande, utilisez une image de 2Mo maximum.</p>";
               echo "<a class='btn btn-primary' href='index.php?addmore'>Réessayer</a>";
             } 
+            //Error alert if try to upload more than 1 image
+            // else if ($checkImg2 >= 2) {
+            //   echo "<p class='p-3 mb-2 alert-danger text-red text-center'>Vous ne pouvez upload qu'une seule image.</p>";
+            //   echo "<a class='btn btn-primary' href='index.php?addmore'>Réessayer</a>";
+            // }
+            //Error alert if image is already uploaded
+            else if (!empty($_SESSION) && !file_exists($checkImg)) {
+              echo "<p class='p-3 mb-2 alert-danger text-red text-center'>Une image existe déjà, supprimez vos données avant de réessayer.</p>";
+              echo "<a class='btn btn-primary' href='index.php?addmore'>Réessayer</a>";
+            }
             //Error alert if errors are detected
             else if ($fileError >= 1) {
               echo "<p class='p-3 mb-2 alert-danger text-red text-center'>$fileError a été détecter lors du téléchargement de l'image.</p>";
               echo "<a class='btn btn-primary' href='index.php?addmore'>Réessayer</a>";
             }
             //Error alert if names are unvalid
-            else if (strlen($firstName) <2||strlen($firstName) >20) {
+            else if (strlen($firstName) <=2||strlen($firstName) >20) {
               echo "<p class='p-3 mb-2 alert-danger text-red text-center'>Le prénom doit avoir entre 2 et 20 caractères.</p>";
               echo "<a class='btn btn-primary' href='index.php?addmore'>Réessayer</a>";
             }
@@ -168,7 +179,7 @@ if (!empty($_SESSION)) {$table = $_SESSION['table'];}
               echo "<p class='p-3 mb-2 alert-danger text-red text-center'>Le prénom ne doit contenir que des lettres.</p>";
               echo "<a class='btn btn-primary' href='index.php?addmore'>Réessayer</a>";
             }
-            else if (strlen($lastName) <2||strlen($lastName) >20) {
+            else if (strlen($lastName) <=2||strlen($lastName) >20) {
               echo "<p class='p-3 mb-2 alert-danger text-red text-center'>Le nom doit avoir entre 2 et 20 caractères.</p>";
               echo "<a class='btn btn-primary' href='index.php?addmore'>Réessayer</a>";
             }
